@@ -1,0 +1,43 @@
+Tickets
+
+	Basic ticket system, no email features but maybe later can add as module
+	no SLAs or timing
+	no client login side at the moment, but will ne a log ticket page for anyone.
+
+Stages
+
+Alpha -> Beta -> Release
+
+
+TODO
+
+Features
+	Add file attachments feature
+	Add category list feature
+	Add department/location list feature
+	Add reports feature
+	Add search feature to see past tickets
+	Closing ticket may need datetime.
+
+Bugs
+	Re-assign ticket is not working
+	UI clean up to make easier
+	Control over shown tickets - my tickets, unassigned tickets, All open tickets
+	Messages of errors, move to top instead of bottom
+
+Alpha Version 0.3
+
+-- Working on --
+
+Alpha Version 0.2
+  * File restructor in folders and paths updated in all code
+  * Forced to login.php if no cookie
+  * Begin more tidyup e.g. footer, css bits
+  * Comments now have assigned name attached.
+  * User can log ticket with confirmation screen.
+
+Alpha Version 0.1 
+  * Code from website example created
+  * On hold fuction working
+  * Users feature added
+

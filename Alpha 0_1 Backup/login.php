@@ -1,8 +1,7 @@
 <?php
 $msg = '';
-setcookie("Tickets", "", time() - 3600,"/");
-include 'inc/functions.php';
-
+include 'functions.php';
+setcookie("Tickets", "", time() - 3600);
 
 if (!isset($_POST['username']) && !isset($_POST['password'])) {
     //echo ("no username");
@@ -27,7 +26,7 @@ if (count($users) > 0)
 $cookie_value = $_POST['username'];
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
-header('Location: admin/index.php');
+header('Location: index.php');
 }
 
 
