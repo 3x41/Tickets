@@ -4,6 +4,8 @@ Tickets
 	no SLAs or timing
 	no client login side at the moment, but will ne a log ticket page for anyone.
 
+https://fontawesome.com/v5.9/icons?d=gallery&p=2
+
 Stages
 
 Alpha -> Beta -> Release
@@ -15,17 +17,38 @@ Features
 	Add file attachments feature
 	Add category list feature
 	Add department/location list feature
-	Add reports feature
+	Add reports feature, overview with pie charts
 	Add search feature to see past tickets
 	Closing ticket may need datetime.
+	email options 
+	
 
 Bugs
 	UI clean up to make easier
 	Messages of errors, move to top instead of bottom
 	CSS not loading from one folder. two copies needed
 	Merge W3C CSS instead as its much more flexable
+	create ticket>goes to view ticket, back button is wrong, goes back to create
+	if ticket closed and not assigned, still shows in unassigned. correct.
+	
 
-
+Alpha Version 0.4
+  * List ticket bug fix in sql
+  * counts of tickets now in
+  * button layout changed to top
+  * back button in for better userablity
+  * ticket icon changed
+  * deactive icon changed
+  * user create ticket header menu updated for better access
+  * some other ui changes to make it easier to use
+  * password now masked out
+  * genral flow much better and quick to work
+  * user log ticket now has log another ticket button
+  * DB - Added location,department tables (for future)
+  * DB - Added location,department, resolved fields to tickets table (for future)
+  * can now assign to no-one on create and edit ticket
+  * Resolved date now added when ticket closed/resolved in DB.
+  
 
 Alpha Version 0.3
   * Control over shown tickets - my tickets, unassigned tickets, All open tickets

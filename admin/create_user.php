@@ -22,6 +22,10 @@ if (isset($_POST['username'], $_POST['password'], $_POST['status'])) {
 <?=template_header('Create Ticket')?>
 
 <div class="content create">
+	<div class="btns">
+	<a href="javascript:window.history.back();" class="btn" >Back</a>
+	</div>
+	
 	<h2>Create User</h2>
     <form action="create_user.php" method="post">
         <label for="Username">Username</label>

@@ -42,27 +42,10 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?=template_header('Ticket')?>
 
 <div class="content view">
-	<h2><?=htmlspecialchars($ticket['username'], ENT_QUOTES)?> 
 	
-	<span class="<?=$ticket['status']?>">(<?=$ticket['status']?>)</span></h2>
-
-
-    <div class="ticket">
-       
-	   
-	   
-   
-	  
-        <form action="view_user.php" method="post">
-		<label for="password">Password</label>
-		<input type="text" name="password" id="password" value="<?php echo ($ticket['password']) ?>">
-            
-			<input type="hidden" name="id" id="id" value="<?php echo ($ticket['id']) ?>" >
-			<input type="submit" value="Update">
-        </form>
 	
-<div class="btns">
-		
+	<div class="btns">
+		<a href="javascript:window.history.back();" class="btn" >Back</a>
 		<?php	
 				if ($ticket['status']=="active")
 		{
@@ -79,13 +62,34 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		?>
 	
+	</div>
+    
+    
+	<h2>User Account</h2>
+
 	
 	
 	
-		
+	<h2><?=htmlspecialchars($ticket['username'], ENT_QUOTES)?> 
+	
+	<span class="<?=$ticket['status']?>">(<?=$ticket['status']?>)</span></h2>
+
+
+    <div class="ticket">
        
-        
-    </div>
+	   
+	   
+   
+	  
+        <form action="view_user.php" method="post">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" value="<?php echo ($ticket['password']) ?>">
+            
+			<input type="hidden" name="id" id="id" value="<?php echo ($ticket['id']) ?>" >
+			<input type="submit" value="Update">
+        </form>
+	
+
     </div>
 
 </div>

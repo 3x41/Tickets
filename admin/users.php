@@ -25,13 +25,14 @@ if(!isset($_COOKIE[$cookie_name])) {
 
 <div class="content home">
 
-	<h2>Users</h2>
-
-	<p>Welcome <?php echo($username); ?> </p>
-
 	<div class="btns">
 		<a href="create_user.php" class="btn">Add User</a>
 	</div>
+
+
+
+	<h2>System Users</h2>
+
 
 	<div class="tickets-list">
 		<?php foreach ($users as $user): ?>
@@ -40,7 +41,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 				<?php if ($user['status'] == 'active'): ?>
 				<i class="far fa-user fa-2x"></i>
 				<?php elseif ($user['status'] == 'deactive'): ?>
-				<i class="fas fa-user fa-2x"></i>
+				<i class="fas fa-user-slash fa-2x"></i>
 				
 				<?php endif; ?>
 			</span>

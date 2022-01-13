@@ -51,6 +51,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 		
 		<label for="email">Assign to User</label>
 				<select name="assigned" id="assigned">
+					<option></option>
 		<?php 
 		foreach($users as $user): 
 			

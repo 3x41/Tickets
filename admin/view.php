@@ -39,15 +39,18 @@ if (isset($_POST['assigned'])) {
 	$stmt = $pdo->prepare($ll);
     $stmt->execute();
 	//exit;
-	header('Location: index.php');
+	header('Location: index.php?vtickets=mytickets');
     
 }
 
 // Update status
 if (isset($_GET['status']) && in_array($_GET['status'], array('open', 'closed', 'resolved', 'hold'))) {
-    $stmt = $pdo->prepare('UPDATE tickets SET status = ? WHERE id = ?');
+    $stmt = $pdo->prepare('UPDATE tickets SET status = ?,resolved=CURDATE() WHERE id = ?');
     $stmt->execute([ $_GET['status'], $_GET['id'] ]);
-	header('Location: index.php');
+	header('Location: index.php?vtickets=mytickets');
+	
+	//UPDATE tickets SET status="open",resolved=CURDATE() WHERE id=1
+	
     exit;
 }
 
@@ -57,7 +60,7 @@ if (isset($_POST['msg']) && !empty($_POST['msg'])) {
     $stmt = $pdo->prepare('INSERT INTO tickets_comments (ticket_id, msg, assigned) VALUES (?, ?, ?)');
     $stmt->execute([ $_GET['id'], $_POST['msg'], $_POST['assigned'] ]);
     //header('Location: view.php?id=' . $_GET['id']);
-	header('Location: index.php');
+	header('Location: index.php?vtickets=mytickets');
 	
     exit;
 }
@@ -79,11 +82,51 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?=template_header('Ticket')?>
 
+  
+  
+  
+  
+  
 <div class="content view">
+	
+	<div class="btns">
+		
+		<a href="javascript:window.history.back();" class="btn" >Back</a>
+
+		<?php
+		if ($ticket['status']=="closed" || $ticket['status']=="resolved")
+		{
+		?>	
+			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Re-Open Ticket</a>
+		<?php	
+		}
+		
+		if ($ticket['status']=="hold")
+		{
+			?>
+			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Remove Hold</a>
+		<?php
+		}
+		else
+		{
+			?>
+			<a href="view.php?id=<?=$_GET['id']?>&status=hold" class="btn red">On Hold</a>
+		<?php
+		}
+		
+		?>
+	
+	
+	<a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
+        <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
+  </div>
+	
+	
+	
 	<h2><?=htmlspecialchars($ticket['title'], ENT_QUOTES)?> 
 	
 	<span class="<?=$ticket['status']?>">(<?=$ticket['status']?>)</span></h2>
-	<h1>Ticket <?php echo("#".$ticket['id']) ?>
+	<h1>Ticket Number <?php echo("#".$ticket['id']) ?>
 
 	<?php
 		if ($ticket['assigned']==null)
@@ -133,40 +176,14 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
         </form>
 	
-<div class="btns">
-		<?php
-		if ($ticket['status']=="closed" || $ticket['status']=="resolved")
-		{
-		?>	
-			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Re-Open Ticket</a>
-		<?php	
-		}
 		
-		if ($ticket['status']=="hold")
-		{
-			?>
-			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Remove Hold</a>
-		<?php
-		}
-		else
-		{
-			?>
-			<a href="view.php?id=<?=$_GET['id']?>&status=hold" class="btn red">On Hold</a>
-		<?php
-		}
-		
-		?>
-	
-	
-	<a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
-        <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
-  </div>		
 		
 	
 	<form action="" method="post">
 		
-		<label for="email">Assign to User</label>
+		<label for="email">Assign Ticket to User</label>
 		<select name="assigned" id="assigned">
+			<option></option>
 		<?php 
 		foreach($users as $user): 
 			

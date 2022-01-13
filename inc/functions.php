@@ -28,7 +28,7 @@ echo <<<EOT
     <nav class="navtop">
     	<div>
     		<h1>Ticketing System</h1>
-            <a href="index.php"><i class="fas fa-ticket-alt"></i>Tickets</a>
+            <a href="index.php?vtickets=unassigned"><i class="fas fa-clipboard-list"></i>Tickets</a>
 			<a href="users.php"><i class="fas fa-user"></i>Users</a>
 			<!--
 			<a href="search.php"><i class="fas fa-search"></i>Search</a>
@@ -49,14 +49,15 @@ echo <<<EOT
 	<head>
 		<meta charset="utf-8">
 		<title>$title</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="admin/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
     <nav class="navtop">
     	<div>
     		<h1>Ticketing System</h1>
-            
+    		<a href="user_log_ticket.php"><i class="fas fa-clipboard-list"></i>Create Ticket</a>
+            <a href="login.php"><i class="fas fa-user"></i>Login</a>
     	</div>
     </nav>
 EOT;
@@ -65,6 +66,7 @@ EOT;
 // Template footer
 function template_footer() {
 echo <<<EOT
+    <p>&nbsp;</p>
     <nav class="navtop">
 	</nav>
 	</body>

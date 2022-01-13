@@ -28,6 +28,10 @@ if (isset($_GET['id'])) {
 	<?php echo ($id); ?>
 </H2>
 <p>If you need to contact us about your issue, if you can, please let us know this ticket number so that we can find your request quicker.</p>
+<div class="btns">
+		<a href="user_log_ticket.php" class="btn blue">Create Another Ticket</a>
+		
+</div>	
 </div>
-
+	
 <?=template_footer()?>
