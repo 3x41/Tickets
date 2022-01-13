@@ -1,11 +1,5 @@
 <?php
 include '../inc/functions.php';
-// Connect to MySQL using the below function
-$pdo = pdo_connect_mysql();
-// MySQL query that retrieves  all the tickets from the databse
-$stmt = $pdo->prepare('SELECT * FROM tickets WHERE status = "open" OR status = "hold" ORDER BY created DESC');
-$stmt->execute();
-$tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 $username = "";
@@ -18,6 +12,45 @@ if(!isset($_COOKIE[$cookie_name])) {
 	$username = $_COOKIE[$cookie_name];
 }
 
+
+// Connect to MySQL using the below function
+$pdo = pdo_connect_mysql();
+
+if(isset($_GET['vtickets'])) 
+{
+	//echo ($_GET['vtickets']."...".$username);
+	if($_GET['vtickets']=="mytickets")
+	{
+		$ll = 'SELECT * FROM `tickets` WHERE `assigned` = "alex" AND `status` = "open" OR `assigned` = "'.$username.'" AND `status` = "hold"'; 
+		
+		$stmt = $pdo->prepare($ll);
+	}
+	if($_GET['vtickets']=="unassigned")
+	{
+		$ll = 'SELECT * FROM `tickets` WHERE `assigned` is null; ';
+	}
+	if($_GET['vtickets']=="allopen")
+	{
+		$ll = 'SELECT * FROM tickets WHERE status = "open" OR status = "hold"';
+	}
+
+}
+else
+{
+	
+$ll = 'SELECT * FROM tickets WHERE status = "open" OR status = "hold"';
+}	
+//echo ($ll);
+
+$stmt = $pdo->prepare($ll);
+// MySQL query that retrieves  all the tickets from the databse
+//$stmt = $pdo->prepare('SELECT * FROM tickets WHERE status = "open" OR status = "hold" ORDER BY created DESC');
+$stmt->execute();
+$tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
 ?>
 
 <?=template_header('Tickets')?>
@@ -29,7 +62,12 @@ if(!isset($_COOKIE[$cookie_name])) {
 	<p>Welcome <?php echo($username); ?> </p>
 
 	<div class="btns">
-		<a href="create.php" class="btn">Create Ticket</a>
+		<a href="create.php" class="btn blue">Create</a>
+		
+		
+		<a href="index.php?vtickets=mytickets" class="btn">My Tickets</a>
+		<a href="index.php?vtickets=unassigned" class="btn">Unassigned</a>
+		<a href="index.php?vtickets=allopen" class="btn">All Open</a>
 	</div>
 
 	<div class="tickets-list">

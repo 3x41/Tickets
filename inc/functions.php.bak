@@ -21,7 +21,7 @@ echo <<<EOT
 	<head>
 		<meta charset="utf-8">
 		<title>$title</title>
-		<link href="../css/style.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
@@ -30,8 +30,10 @@ echo <<<EOT
     		<h1>Ticketing System</h1>
             <a href="index.php"><i class="fas fa-ticket-alt"></i>Tickets</a>
 			<a href="users.php"><i class="fas fa-user"></i>Users</a>
+			<!--
 			<a href="search.php"><i class="fas fa-search"></i>Search</a>
 			<a href="reports.php"><i class="fas fa-info"></i>Reports</a>
+			-->
 			<a href="../login.php"><i class="fas fa-door-open"></i>Log Out</a>
     	</div>
     </nav>

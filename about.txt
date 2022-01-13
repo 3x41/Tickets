@@ -20,14 +20,16 @@ Features
 	Closing ticket may need datetime.
 
 Bugs
-	Re-assign ticket is not working
 	UI clean up to make easier
-	Control over shown tickets - my tickets, unassigned tickets, All open tickets
 	Messages of errors, move to top instead of bottom
+	CSS not loading from one folder. two copies needed
+	Merge W3C CSS instead as its much more flexable
+
+
 
 Alpha Version 0.3
-
--- Working on --
+  * Control over shown tickets - my tickets, unassigned tickets, All open tickets
+  * Re-assign ticket is not working
 
 Alpha Version 0.2
   * File restructor in folders and paths updated in all code

@@ -1,5 +1,18 @@
 <?php
 include '../inc/functions.php';
+
+
+$username = "";
+$cookie_name = "Tickets";
+
+if(!isset($_COOKIE[$cookie_name])) {
+  //echo "Cookie named '" . $cookie_name . "' is not set!";
+  header('Location: login.php');
+} else {
+	$username = $_COOKIE[$cookie_name];
+}
+
+
 // Connect to MySQL using the below function
 $pdo = pdo_connect_mysql();
 // Check if the ID param in the URL exists
@@ -16,11 +29,18 @@ if (!$ticket) {
 }
 
 // Update assigned
-if (isset($_GET['assigned'])) {
-    $stmt = $pdo->prepare('UPDATE tickets SET assigned = ? WHERE id = ?');
-    $stmt->execute([ $_POST['assigned'], $_GET['id'] ]);
+if (isset($_POST['assigned'])) {
+    
+ 
+	
+	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."' WHERE `tickets`.`id` =".$_POST['id'];
+	//echo ($ll);
+
+	$stmt = $pdo->prepare($ll);
+    $stmt->execute();
+	//exit;
 	header('Location: index.php');
-    exit;
+    
 }
 
 // Update status
@@ -41,7 +61,7 @@ if (isset($_POST['msg']) && !empty($_POST['msg'])) {
 	
     exit;
 }
-$stmt = $pdo->prepare('SELECT * FROM tickets_comments WHERE ticket_id = ? ORDER BY created DESC');
+$stmt = $pdo->prepare('SELECT * FROM tickets_comments WHERE ticket_id = ?');
 $stmt->execute([ $_GET['id'] ]);
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -51,6 +71,8 @@ $pdo = pdo_connect_mysql();
 $stmt = $pdo->prepare('SELECT * FROM users WHERE status="active"');
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 
 ?>
@@ -98,23 +120,14 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
         <form action="" method="post">
 		
-		<label for="email">Assign to User</label>
-		<select name="assigned" id="assigned">
-		<?php 
-		foreach($users as $user): 
-			
-			if ($ticket['assigned']==$user['username'])
-			{
-				echo ('<option selected>'.$user['username'].'</option>');
-			}
-			else
-			{
-			echo ('<option>'.$user['username'].'</option>');
-			}
-			
-        endforeach; 
-		?>
-		</select>
+		
+		
+		
+		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
+		<input type="hidden" name="assigned" id="assigned" value="<?php echo($username); ?>">
+		
+		
+		
             <textarea name="msg" placeholder="Enter your comment..."></textarea>
             <input type="submit" value="Update Ticket">
 			
@@ -145,14 +158,42 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		?>
 	
 	
-	
-	
-		
-        <a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
+	<a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
         <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
+  </div>		
 		
-		<a href="view.php?id=<?=$_GET['id']?>&assigned=<?=$_POST['assigned']?>" class="btn red">Re-Assign</a>
-    </div>
+	
+	<form action="" method="post">
+		
+		<label for="email">Assign to User</label>
+		<select name="assigned" id="assigned">
+		<?php 
+		foreach($users as $user): 
+			
+			if ($ticket['assigned']==$user['username'])
+			{
+				echo ('<option selected>'.$user['username'].'</option>');
+			}
+			else
+			{
+			echo ('<option>'.$user['username'].'</option>');
+			}
+			
+        endforeach; 
+		?>
+		</select>
+		
+		
+		
+		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
+            <input type="submit" value="Assign">
+			
+        </form>
+	
+		
+        
+		
+  
     </div>
 
 </div>
