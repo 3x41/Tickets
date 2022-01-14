@@ -29,8 +29,10 @@ echo <<<EOT
     	<div>
     		<h1>Ticketing System</h1>
             <a href="index.php?vtickets=unassigned"><i class="fas fa-clipboard-list"></i>Tickets</a>
-			<a href="users.php"><i class="fas fa-user"></i>Users</a>
+			
+			<a href="config.php"><i class="fas fa-cog"></i>Config</a>
 			<!--
+			<a href="users.php"><i class="fas fa-user"></i>Users</a>
 			<a href="search.php"><i class="fas fa-search"></i>Search</a>
 			<a href="reports.php"><i class="fas fa-info"></i>Reports</a>
 			-->

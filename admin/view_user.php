@@ -17,11 +17,22 @@ if (!$ticket) {
 
 // Update status
 if (isset($_GET['status']) ) {
+	
+	if ($_GET['status']=="delete"){
+		//echo ("DELETED");
+		$stmt = $pdo->prepare('DELETE FROM users WHERE id = ?');
+		$stmt->execute([ $_GET['id'] ]);
+		header('Location: users.php');
+		exit;
+	}
+	else{
+		
     $stmt = $pdo->prepare('UPDATE users SET status = ? WHERE id = ?');
     $stmt->execute([ $_GET['status'], $_GET['id'] ]);
     //header('Location: view.php?id=' . $_GET['id']);
 	header('Location: users.php');
     exit;
+	}
 }
 
 // Check if the comment form has been submitted
@@ -61,7 +72,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		
 		?>
-	
+	<a href="view_user.php?id=<?=$_GET['id']?>&status=delete" class="btn red">Delete</a>
 	</div>
     
     

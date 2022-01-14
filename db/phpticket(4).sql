@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2022 at 12:46 AM
+-- Generation Time: Jan 15, 2022 at 12:38 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `catagory`
+--
+
+CREATE TABLE `catagory` (
+  `id` int(11) NOT NULL,
+  `catagory` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `catagory`
+--
+
+INSERT INTO `catagory` (`id`, `catagory`) VALUES
+(2, 'Software'),
+(3, 'Hardware'),
+(4, 'Printer');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
@@ -31,6 +51,14 @@ CREATE TABLE `department` (
   `id` int(11) NOT NULL,
   `department` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`id`, `department`) VALUES
+(2, 'IT'),
+(3, 'Accounts');
 
 -- --------------------------------------------------------
 
@@ -42,6 +70,35 @@ CREATE TABLE `location` (
   `id` int(11) NOT NULL,
   `location` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `location`) VALUES
+(2, 'Room 101'),
+(3, '22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `source`
+--
+
+CREATE TABLE `source` (
+  `id` int(11) NOT NULL,
+  `type` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `source`
+--
+
+INSERT INTO `source` (`id`, `type`) VALUES
+(5, 'Phone'),
+(6, 'Email'),
+(7, 'In Person'),
+(8, 'Other');
 
 -- --------------------------------------------------------
 
@@ -59,30 +116,32 @@ CREATE TABLE `tickets` (
   `assigned` varchar(50) DEFAULT NULL,
   `resolved` datetime DEFAULT NULL,
   `department` varchar(250) DEFAULT NULL,
-  `location` varchar(250) DEFAULT NULL
+  `location` varchar(250) DEFAULT NULL,
+  `source` varchar(200) DEFAULT NULL,
+  `category` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `title`, `msg`, `email`, `created`, `status`, `assigned`, `resolved`, `department`, `location`) VALUES
-(1, 'Test Ticket', 'This is your first ticket.', 'support@codeshack.io', '2020-06-10 13:06:17', 'closed', 'alex', '2022-01-13 00:00:00', NULL, NULL),
-(2, 'rewrew', 'rew', 'ffds@Fds.com', '2022-01-09 21:07:35', 'closed', 'aa', NULL, NULL, NULL),
-(3, 'test', 'sdadsa', 'test@te.com', '2022-01-09 21:17:58', 'hold', 'open', NULL, NULL, NULL),
-(4, 'This is a test title', 'sdjkaldjal dasj ddjsla djskl dsajkl jkljkl adas asj ajdas\r\nd sdjska lklas ja a\r\ns\r\nd sadas das \r\nas dsjakldjskljdlkajskdj kl\r\n s', 'as@as.com', '2022-01-09 21:28:56', 'resolved', 'alex', NULL, NULL, NULL),
-(5, 'cc', 'cxz', 'c@cx.com', '2022-01-09 21:50:41', 'open', 'alex', NULL, NULL, NULL),
-(6, 'This is asas ', 'dssa', 'dsa@dsa.com', '2022-01-09 22:21:59', 'closed', 'alex', NULL, NULL, NULL),
-(7, 'ss', 'ss', 'ss@ss.com', '2022-01-11 00:06:31', 'open', 'aa', NULL, NULL, NULL),
-(8, 'lll', 'xzxz', 'll@ll.com', '2022-01-11 22:06:49', 'closed', 'alex', NULL, NULL, NULL),
-(9, 'aaaaaaaaaaaaaaaaa', 'aaaaaaa', 'ss@ss.com', '2022-01-11 22:09:17', 'hold', 'alex', NULL, NULL, NULL),
-(10, 'w', 'TEST', 'ss@ss.com', '2022-01-11 23:45:15', 'open', 'aa', NULL, NULL, NULL),
-(11, 'vcv', 'dsdsa', 'vcx@vcx.com', '2022-01-12 21:48:15', 'open', 'aa', NULL, NULL, NULL),
-(12, 'ssssss', 'qqqqqqqqqqqqqqq', 'ss@ss.com', '2022-01-12 22:49:03', 'open', 'alex', NULL, NULL, NULL),
-(13, 'New ticket in', 'This is a test', 'a@a.com', '2022-01-13 22:25:36', 'closed', NULL, '2022-01-13 00:00:00', NULL, NULL),
-(14, 's', 'saa', 'ss@ss.com', '2022-01-13 22:31:16', 'open', NULL, NULL, NULL, NULL),
-(15, 'dsad', 'ccccccccccccccc', 'cookloz@aol.com', '2022-01-13 23:21:53', 'open', 'alex', NULL, NULL, NULL),
-(16, 'qqqqq', 'qqqq', 'cookloz@aol.com', '2022-01-13 23:25:34', 'closed', '', '2022-01-13 00:00:00', NULL, NULL);
+INSERT INTO `tickets` (`id`, `title`, `msg`, `email`, `created`, `status`, `assigned`, `resolved`, `department`, `location`, `source`, `category`) VALUES
+(1, 'Test Ticket', 'This is your first ticket.', 'support@codeshack.io', '2020-06-10 13:06:17', 'closed', 'alex', '2022-01-13 00:00:00', NULL, NULL, NULL, NULL),
+(2, 'rewrew', 'rew', 'ffds@Fds.com', '2022-01-09 21:07:35', 'closed', 'aa', NULL, NULL, NULL, NULL, NULL),
+(3, 'test', 'sdadsa', 'test@te.com', '2022-01-09 21:17:58', 'hold', 'open', NULL, NULL, NULL, NULL, NULL),
+(4, 'This is a test title', 'sdjkaldjal dasj ddjsla djskl dsajkl jkljkl adas asj ajdas\r\nd sdjska lklas ja a\r\ns\r\nd sadas das \r\nas dsjakldjskljdlkajskdj kl\r\n s', 'as@as.com', '2022-01-09 21:28:56', 'resolved', 'alex', NULL, NULL, NULL, NULL, NULL),
+(5, 'cc', 'cxz', 'c@cx.com', '2022-01-09 21:50:41', 'open', 'alex', NULL, NULL, NULL, NULL, NULL),
+(6, 'This is asas ', 'dssa', 'dsa@dsa.com', '2022-01-09 22:21:59', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL),
+(7, 'ss', 'ss', 'ss@ss.com', '2022-01-11 00:06:31', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
+(8, 'lll', 'xzxz', 'll@ll.com', '2022-01-11 22:06:49', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL),
+(9, 'aaaaaaaaaaaaaaaaa', 'aaaaaaa', 'ss@ss.com', '2022-01-11 22:09:17', 'hold', 'alex', NULL, NULL, NULL, NULL, NULL),
+(10, 'w', 'TEST', 'ss@ss.com', '2022-01-11 23:45:15', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
+(11, 'vcv', 'dsdsa', 'vcx@vcx.com', '2022-01-12 21:48:15', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
+(12, 'ssssss', 'qqqqqqqqqqqqqqq', 'ss@ss.com', '2022-01-12 22:49:03', 'open', 'alex', NULL, NULL, NULL, NULL, NULL),
+(13, 'New ticket in', 'This is a test', 'a@a.com', '2022-01-13 22:25:36', 'closed', NULL, '2022-01-13 00:00:00', NULL, NULL, NULL, NULL),
+(14, 's', 'saa', 'ss@ss.com', '2022-01-13 22:31:16', 'open', NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 'dsad', 'ccccccccccccccc', 'cookloz@aol.com', '2022-01-13 23:21:53', 'open', 'alex', NULL, NULL, NULL, NULL, NULL),
+(16, 'qqqqq', 'qqqq', 'cookloz@aol.com', '2022-01-13 23:25:34', 'closed', '', '2022-01-13 00:00:00', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -146,13 +205,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `status`) VALUES
-(1, 'aa', 'aa', 'active'),
 (2, 'alex', 'alex', 'active'),
-(3, 'unassigned', 'aaaaaaaaaaaaaaaaaaaa', 'deactive');
+(4, 'aa', 'aa', 'active');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `catagory`
+--
+ALTER TABLE `catagory`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `department`
@@ -164,6 +228,12 @@ ALTER TABLE `department`
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `source`
+--
+ALTER TABLE `source`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -189,16 +259,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `catagory`
+--
+ALTER TABLE `catagory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `source`
+--
+ALTER TABLE `source`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tickets`
@@ -216,7 +298,7 @@ ALTER TABLE `tickets_comments`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

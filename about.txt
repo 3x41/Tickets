@@ -15,12 +15,11 @@ TODO
 
 Features
 	Add file attachments feature
-	Add category list feature
 	Add department/location list feature
 	Add reports feature, overview with pie charts
 	Add search feature to see past tickets
-	Closing ticket may need datetime.
-	email options 
+	email options (much later)
+	add category,department,location,source to view ticket admin
 	
 
 Bugs
@@ -31,6 +30,20 @@ Bugs
 	create ticket>goes to view ticket, back button is wrong, goes back to create
 	if ticket closed and not assigned, still shows in unassigned. correct.
 	
+
+Alpha Version 0.5
+
+added source table and field in ticket
+can now delete a user in the system
+config section now in
+ticket source management done in config
+ticket location management done in config
+ticket department management done in config
+ticket category management done in config
+  * DB - Added category tables (for future)
+  * DB - Added category fields to tickets table (for future)
+
+
 
 Alpha Version 0.4
   * List ticket bug fix in sql
