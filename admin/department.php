@@ -40,7 +40,7 @@ if(!isset($_COOKIE[$cookie_name])) {
 		<a href="view_department.php?id=<?=$user['id']?>" class="ticket">
 			<span class="con">
 				
-				<i class="far fa-info fa-2x"></i>
+				<i class="fal fa-highlighter fa-2x"></i>
 				
 			</span>
 			<span class="con">

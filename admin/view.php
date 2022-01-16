@@ -31,16 +31,16 @@ if (!$ticket) {
 // Update assigned
 if (isset($_POST['assigned'])) {
     
- 
+
 	
-	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."' WHERE `tickets`.`id` =".$_POST['id'];
+	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."', `location` = '".$_POST['location']."', `source` = '".$_POST['source']."', `department` = '".$_POST['department']."', `catagory` = '".$_POST['catagory']."' WHERE `tickets`.`id` =".$_POST['id'];
 	//echo ($ll);
 
 	$stmt = $pdo->prepare($ll);
     $stmt->execute();
-	//exit;
 	header('Location: index.php?vtickets=mytickets');
-    
+    exit;
+	
 }
 
 // Update status
@@ -76,7 +76,29 @@ $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+// MySQL query that retrieves  all the tickets from the databse
+$stmt = $pdo->prepare('SELECT * FROM location');
+$stmt->execute();
+$locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+
+
+// MySQL query that retrieves  all the tickets from the databse
+$stmt = $pdo->prepare('SELECT * FROM source');
+$stmt->execute();
+$sources = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// MySQL query that retrieves  all the tickets from the databse
+$stmt = $pdo->prepare('SELECT * FROM department');
+$stmt->execute();
+$departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// MySQL query that retrieves  all the tickets from the databse
+$stmt = $pdo->prepare('SELECT * FROM catagory');
+$stmt->execute();
+$catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -177,7 +199,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
 	
 		
-		
+		<hr>
 	
 	<form action="" method="post">
 		
@@ -200,10 +222,107 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		?>
 		</select>
 		
-		
+	
+
+
+
+
+
+
+
+
+
+
+		<label for="email">Location</label>
+		<select name="location" id="location">
+			<option></option>
+		<?php 
+		foreach($locations as $loc): 
+			
+			if ($ticket['location']==$loc['location'])
+			{
+				echo ('<option selected>'.$loc['location'].'</option>');
+			}
+			else
+			{
+			echo ('<option>'.$loc['location'].'</option>');
+			}
+			
+        endforeach; 
+		?>
+		</select>
+
+
+
+		<label for="email">Source</label>
+		<select name="source" id="source">
+			<option></option>
+		<?php 
+		foreach($sources as $source): 
+			
+			if ($ticket['source']==$source['type'])
+			{
+				echo ('<option selected>'.$source['type'].'</option>');
+			}
+			else
+			{
+			echo ('<option>'.$source['type'].'</option>');
+			}
+			
+        endforeach; 
+		?>
+		</select>
+
+
+		<label for="email">Department</label>
+		<select name="department" id="department">
+			<option></option>
+		<?php 
+		foreach($departments as $department): 
+			
+			if ($ticket['department']==$department['department'])
+			{
+				echo ('<option selected>'.$department['department'].'</option>');
+			}
+			else
+			{
+			echo ('<option>'.$department['department'].'</option>');
+			}
+			
+        endforeach; 
+		?>
+		</select>
+
+
+
+		<label for="email">Catagory</label>
+		<select name="catagory" id="catagory">
+			<option></option>
+		<?php 
+		foreach($catagorys as $catagory): 
+			
+			if ($ticket['catagory']==$catagory['catagory'])
+			{
+				echo ('<option selected>'.$catagory['catagory'].'</option>');
+			}
+			else
+			{
+			echo ('<option>'.$catagory['catagory'].'</option>');
+			}
+			
+        endforeach; 
+		?>
+		</select>
+
+
+
+
+
+
+	
 		
 		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
-            <input type="submit" value="Assign">
+            <input type="submit" value="Update">
 			
         </form>
 	

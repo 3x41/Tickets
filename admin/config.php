@@ -63,13 +63,6 @@ if(!isset($_COOKIE[$cookie_name])) {
 	<td>Hardware software etc</td>
 </tr>
 
-<tr><td>TODO</td><td></td></tr>
-
-
-<tr>
-	<td><a href="#" class="btn">Email Config</a></td>
-	<td>not in db or done in any way</td>
-</tr>
 
 
 	
