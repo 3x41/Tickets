@@ -5,7 +5,7 @@ include '../inc/functions.php';
 // Connect to MySQL using the below function
 $pdo = pdo_connect_mysql();
 // MySQL query that retrieves  all the tickets from the databse
-$stmt = $pdo->prepare('SELECT * FROM location');
+$stmt = $pdo->prepare('SELECT * FROM catagory');
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -14,7 +14,7 @@ $cookie_name = "Tickets";
 
 if(!isset($_COOKIE[$cookie_name])) {
 //  echo "Cookie named '" . $cookie_name . "' is not set!";
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
 	$username = $_COOKIE[$cookie_name];
 }
@@ -27,26 +27,27 @@ if(!isset($_COOKIE[$cookie_name])) {
 
 	<div class="btns">
 	<a href="config.php" class="btn" >Back</a>
-		<a href="create_location.php" class="btn">Add Location</a>
+		<a href="create_catagory.php" class="btn">Add Catagory</a>
 	</div>
 
 
 
-	<h2>Ticket Location</h2>
+	<h2>Ticket Catagory</h2>
 
 
 	<div class="tickets-list">
 		<?php foreach ($users as $user): ?>
-		<a href="view_location.php?id=<?=$user['id']?>" class="ticket">
+		<a href="view_catagory.php?id=<?=$user['id']?>" class="ticket">
 			<span class="con">
-				
-				<i class="far fa-info fa-2x"></i>
-				
+
+
+				<i class="fas fa-angle-right"></i>
+
 			</span>
 			<span class="con">
-			    
-				<span class="title"><?=htmlspecialchars($user['location'], ENT_QUOTES)?></span>
-				
+
+				<span class="title"><?=htmlspecialchars($user['catagory'], ENT_QUOTES)?></span>
+
 			</span>
 			<span class="con created"></span>
 		</a>

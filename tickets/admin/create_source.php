@@ -29,7 +29,7 @@ if (isset($_POST['type'])) {
 	<h2>Create Source</h2>
     <form action="create_source.php" method="post">
         <label for="Username">Type</label>
-        <input type="text" name="type" placeholder="type" id="type" required>
+        <input type="text" name="type" placeholder="Type" id="type" required>
         <input type="hidden" name="status" value="active" id="status">
         <input type="submit" value="Create Source">
     </form>

@@ -1,4 +1,6 @@
 <?php
+
+$ProgramVersion = "0.7 Alpha Version";
 function pdo_connect_mysql() {
     // Update the details below with your MySQL details
     $DATABASE_HOST = 'localhost';
@@ -21,7 +23,7 @@ echo <<<EOT
 	<head>
 		<meta charset="utf-8">
 		<title>$title</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="../inc/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
@@ -29,7 +31,7 @@ echo <<<EOT
     	<div>
     		<h1>Ticketing System</h1>
             <a href="index.php?vtickets=unassigned"><i class="fas fa-clipboard-list"></i>Tickets</a>
-			
+
 			<a href="config.php"><i class="fas fa-cog"></i>Config</a>
 			<!--
 			<a href="users.php"><i class="fas fa-user"></i>Users</a>
@@ -51,7 +53,7 @@ echo <<<EOT
 	<head>
 		<meta charset="utf-8">
 		<title>$title</title>
-		<link href="admin/style.css" rel="stylesheet" type="text/css">
+		<link href="inc/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body>
@@ -70,6 +72,19 @@ function template_footer() {
 echo <<<EOT
     <p>&nbsp;</p>
     <nav class="navtop">
+    <div>
+    <p style="color:white;">
+
+    Ticketing System -
+EOT;
+GLOBAL $ProgramVersion;
+echo (" ".$ProgramVersion);
+
+
+echo <<<EOT
+
+</p>
+      </div>
 	</nav>
 	</body>
 </html>

@@ -25,11 +25,11 @@ if (isset($_POST['location'])) {
 	<div class="btns">
 	<a href="javascript:window.history.back();" class="btn" >Back</a>
 	</div>
-	
+
 	<h2>Create Location</h2>
     <form action="create_location.php" method="post">
         <label for="Username">Location</label>
-        <input type="text" name="location" placeholder="location" id="location" required>
+        <input type="text" name="location" placeholder="Location" id="location" required>
         <input type="hidden" name="status" value="active" id="status">
         <input type="submit" value="Create Location">
     </form>

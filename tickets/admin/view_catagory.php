@@ -7,7 +7,7 @@ if (!isset($_GET['id'])) {
     exit('No ID specified!');
 }
 // MySQL query that selects the ticket by the ID column, using the ID GET request variable
-$stmt = $pdo->prepare('SELECT * FROM location WHERE id = ?');
+$stmt = $pdo->prepare('SELECT * FROM catagory WHERE id = ?');
 $stmt->execute([ $_GET['id'] ]);
 $ticket = $stmt->fetch(PDO::FETCH_ASSOC);
 // Check if ticket exists
@@ -20,9 +20,9 @@ if (isset($_GET['status']) ) {
 	
 	if ($_GET['status']=="delete"){
 		//echo ("DELETED");
-		$stmt = $pdo->prepare('DELETE FROM location WHERE id = ?');
+		$stmt = $pdo->prepare('DELETE FROM catagory WHERE id = ?');
 		$stmt->execute([ $_GET['id'] ]);
-		header('Location: location.php');
+		header('Location: catagory.php');
 		exit;
 	}
 	
@@ -30,7 +30,7 @@ if (isset($_GET['status']) ) {
 
 
 
-$stmt = $pdo->prepare('SELECT * FROM location WHERE id = ? ORDER BY created DESC');
+$stmt = $pdo->prepare('SELECT * FROM catagory WHERE id = ? ORDER BY created DESC');
 $stmt->execute([ $_GET['id'] ]);
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -43,18 +43,19 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<div class="btns">
 		<a href="javascript:window.history.back();" class="btn" >Back</a>
 		
-	<a href="view_location.php?id=<?=$_GET['id']?>&status=delete" class="btn red">Delete</a>
+	<a href="view_catagory.php?id=<?=$_GET['id']?>&status=delete" class="btn red">Delete</a>
 	</div>
     
     
-	<h2>Ticket Location</h2>
+	<h2>Ticket Catagory</h2>
 
 	
+	<h3><i class="fas fa-angle-right"></i>&nbsp;&nbsp;&nbsp;
+	<?=htmlspecialchars($ticket['catagory'], ENT_QUOTES)?>
+	</h3>
 	
 	
-	<h2><?=htmlspecialchars($ticket['location'], ENT_QUOTES)?> 
-	</h2>
-
+	
 
   
 

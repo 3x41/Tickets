@@ -13,7 +13,7 @@ $cookie_name = "Tickets";
 
 if(!isset($_COOKIE[$cookie_name])) {
 //  echo "Cookie named '" . $cookie_name . "' is not set!";
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
 	$username = $_COOKIE[$cookie_name];
 }
@@ -24,17 +24,17 @@ if(!isset($_COOKIE[$cookie_name])) {
 
 <div class="content home">
 
-	<h2>Search</h2>
+	<h2>Reports</h2>
 
 	<p>Welcome <?php echo($username); ?> </p>
 
 <h1>Not working</h1>
 
 	<div class="btns">
-		<a href="#" class="btn">Search</a>
+		<a href="#" class="btn">Show Report</a>
 	</div>
 
-	
+
 
 </div>
 

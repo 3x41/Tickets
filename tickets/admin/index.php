@@ -7,7 +7,7 @@ $cookie_name = "Tickets";
 
 if(!isset($_COOKIE[$cookie_name])) {
   //echo "Cookie named '" . $cookie_name . "' is not set!";
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
 	$username = $_COOKIE[$cookie_name];
 }
@@ -16,19 +16,19 @@ if(!isset($_COOKIE[$cookie_name])) {
 // Connect to MySQL using the below function
 $pdo = pdo_connect_mysql();
 
-if(isset($_GET['vtickets'])) 
+if(isset($_GET['vtickets']))
 {
 	//echo ($_GET['vtickets']."...".$username);
 	if($_GET['vtickets']=="mytickets")
 	{
-		$ll = 'SELECT * FROM `tickets` WHERE `assigned` = "'.$username.'" AND `status` = "open" OR `assigned` = "'.$username.'" AND `status` = "hold"'; 
-		
+		$ll = 'SELECT * FROM `tickets` WHERE `assigned` = "'.$username.'" AND `status` = "open" OR `assigned` = "'.$username.'" AND `status` = "hold"';
+
 	}
 	if($_GET['vtickets']=="unassigned")
 	{
 		$ll = 'SELECT * FROM `tickets` WHERE `assigned` is null OR `assigned` = ""; ';
-		//SELECT * FROM `tickets` WHERE (`assigned` is null AND status = "open" OR status = "hold") OR (`assigned` = "" AND status = "open" OR status = "hold"); 
-		
+		//SELECT * FROM `tickets` WHERE (`assigned` is null AND status = "open" OR status = "hold") OR (`assigned` = "" AND status = "open" OR status = "hold");
+
 	}
 	if($_GET['vtickets']=="allopen")
 	{
@@ -38,9 +38,9 @@ if(isset($_GET['vtickets']))
 }
 else
 {
-	
+
 $ll = 'SELECT * FROM tickets WHERE status = "open" OR status = "hold"';
-}	
+}
 
 
 
@@ -76,51 +76,50 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="content home">
 
-	
+
 
 	<div class="btns">
 		<a href="create.php" class="btn blue">Create</a>
-		
-		
+
+
 		<a href="index.php?vtickets=mytickets" class="btn">My Tickets (
 		<?php
 			foreach ($myticket_count as $count):
 				echo ($count['TotalCount']);
 			endforeach;
 		?>
-		
+
 		)</a>
 		<a href="index.php?vtickets=unassigned" class="btn">Unassigned (
-		
-		
+
+
 		<?php
 			foreach ($unassigned_count as $count):
 				echo ($count['TotalCount']);
 			endforeach;
 		?>
-		
-		
+
+
 		)</a>
 		<a href="index.php?vtickets=allopen" class="btn">All Open (
 		<?php
 			foreach ($open_count as $count):
 				echo ($count['TotalCount']);
 			endforeach;
-		?>		
-		
-		
-		
+		?>
+
+
+
 		)</a>
 	</div>
-	
-	
-	
+
+
+
 	<h2>Tickets</h2>
 
-	<p>Welcome <?php echo($username); ?><hr></p>
-	
-	
-	
+	<p>Welcome <?php echo(ucfirst($username)); ?><hr></p>
+
+
 
 	<div class="tickets-list">
 		<?php foreach ($tickets as $ticket): ?>

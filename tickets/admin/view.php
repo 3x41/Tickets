@@ -7,7 +7,7 @@ $cookie_name = "Tickets";
 
 if(!isset($_COOKIE[$cookie_name])) {
   //echo "Cookie named '" . $cookie_name . "' is not set!";
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
 	$username = $_COOKIE[$cookie_name];
 }
@@ -28,19 +28,23 @@ if (!$ticket) {
     exit('Invalid ticket ID!');
 }
 
+
+$Redirect = "No";
+
 // Update assigned
 if (isset($_POST['assigned'])) {
-    
 
-	
+
+
 	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."', `location` = '".$_POST['location']."', `source` = '".$_POST['source']."', `department` = '".$_POST['department']."', `catagory` = '".$_POST['catagory']."' WHERE `tickets`.`id` =".$_POST['id'];
 	//echo ($ll);
 
 	$stmt = $pdo->prepare($ll);
     $stmt->execute();
-	header('Location: index.php?vtickets=mytickets');
-    exit;
-	
+//	header('Location: index.php?vtickets=mytickets');
+  $Redirect = "Yes";
+  //  exit;
+
 }
 
 // Update status
@@ -48,10 +52,11 @@ if (isset($_GET['status']) && in_array($_GET['status'], array('open', 'closed', 
     $stmt = $pdo->prepare('UPDATE tickets SET status = ?,resolved=CURDATE() WHERE id = ?');
     $stmt->execute([ $_GET['status'], $_GET['id'] ]);
 	header('Location: index.php?vtickets=mytickets');
-	
+  $Redirect = "Yes";
+
 	//UPDATE tickets SET status="open",resolved=CURDATE() WHERE id=1
-	
-    exit;
+
+//    exit;
 }
 
 // Check if the comment form has been submitted
@@ -60,10 +65,20 @@ if (isset($_POST['msg']) && !empty($_POST['msg'])) {
     $stmt = $pdo->prepare('INSERT INTO tickets_comments (ticket_id, msg, assigned) VALUES (?, ?, ?)');
     $stmt->execute([ $_GET['id'], $_POST['msg'], $_POST['assigned'] ]);
     //header('Location: view.php?id=' . $_GET['id']);
-	header('Location: index.php?vtickets=mytickets');
-	
+    $Redirect = "Yes";
+
+//	header('Location: index.php?vtickets=mytickets');
+
+  //  exit;
+}
+if  ($Redirect == "Yes"){
+
+  	header('Location: index.php?vtickets=mytickets');
+
     exit;
 }
+
+
 $stmt = $pdo->prepare('SELECT * FROM tickets_comments WHERE ticket_id = ?');
 $stmt->execute([ $_GET['id'] ]);
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -104,25 +119,25 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?=template_header('Ticket')?>
 
-  
-  
-  
-  
-  
+
+
+
+
+
 <div class="content view">
-	
+
 	<div class="btns">
-		
-		<a href="javascript:window.history.back();" class="btn" >Back</a>
+
+		<a href="index.php?vtickets=mytickets" class="btn" >Back</a>
 
 		<?php
 		if ($ticket['status']=="closed" || $ticket['status']=="resolved")
 		{
-		?>	
+		?>
 			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Re-Open Ticket</a>
-		<?php	
+		<?php
 		}
-		
+
 		if ($ticket['status']=="hold")
 		{
 			?>
@@ -135,18 +150,18 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			<a href="view.php?id=<?=$_GET['id']?>&status=hold" class="btn red">On Hold</a>
 		<?php
 		}
-		
+
 		?>
-	
-	
+
+
 	<a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
         <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
   </div>
-	
-	
-	
-	<h2><?=htmlspecialchars($ticket['title'], ENT_QUOTES)?> 
-	
+
+
+
+	<h2><?=htmlspecialchars($ticket['title'], ENT_QUOTES)?>
+
 	<span class="<?=$ticket['status']?>">(<?=$ticket['status']?>)</span></h2>
 	<h1>Ticket Number <?php echo("#".$ticket['id']) ?>
 
@@ -159,7 +174,7 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		{
 		echo(" (Assigned to ".$ticket['assigned'].")");
 		}
-		
+
 		?>
 </h1>
 
@@ -168,8 +183,8 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p class="msg"><?=nl2br(htmlspecialchars($ticket['msg'], ENT_QUOTES))?></p>
     </div>
 
-    		
-		
+
+
 
     <div class="comments">
         <?php foreach($comments as $comment): ?>
@@ -184,31 +199,24 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php endforeach; ?>
         <form action="" method="post">
-		
-		
-		
-		
-		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
-		<input type="hidden" name="assigned" id="assigned" value="<?php echo($username); ?>">
-		
-		
-		
-            <textarea name="msg" placeholder="Enter your comment..."></textarea>
+
+
+
+  	<input type="hidden" name="assigned" id="assigned" value="<?php echo($username); ?>">
+
+
+
+            <textarea name="msg" id="msg" placeholder="Enter your comment..."></textarea>
             <input type="submit" value="Update Ticket">
-			
-        </form>
-	
-		
-		<hr>
-	
-	<form action="" method="post">
-		
+
+
+
 		<label for="email">Assign Ticket to User</label>
 		<select name="assigned" id="assigned">
 			<option></option>
-		<?php 
-		foreach($users as $user): 
-			
+		<?php
+		foreach($users as $user):
+
 			if ($ticket['assigned']==$user['username'])
 			{
 				echo ('<option selected>'.$user['username'].'</option>');
@@ -217,12 +225,12 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			{
 			echo ('<option>'.$user['username'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
-		
-	
+
+
 
 
 
@@ -236,9 +244,9 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<label for="email">Location</label>
 		<select name="location" id="location">
 			<option></option>
-		<?php 
-		foreach($locations as $loc): 
-			
+		<?php
+		foreach($locations as $loc):
+
 			if ($ticket['location']==$loc['location'])
 			{
 				echo ('<option selected>'.$loc['location'].'</option>');
@@ -247,8 +255,8 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			{
 			echo ('<option>'.$loc['location'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
 
@@ -257,9 +265,9 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<label for="email">Source</label>
 		<select name="source" id="source">
 			<option></option>
-		<?php 
-		foreach($sources as $source): 
-			
+		<?php
+		foreach($sources as $source):
+
 			if ($ticket['source']==$source['type'])
 			{
 				echo ('<option selected>'.$source['type'].'</option>');
@@ -268,8 +276,8 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			{
 			echo ('<option>'.$source['type'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
 
@@ -277,9 +285,9 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<label for="email">Department</label>
 		<select name="department" id="department">
 			<option></option>
-		<?php 
-		foreach($departments as $department): 
-			
+		<?php
+		foreach($departments as $department):
+
 			if ($ticket['department']==$department['department'])
 			{
 				echo ('<option selected>'.$department['department'].'</option>');
@@ -288,8 +296,8 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			{
 			echo ('<option>'.$department['department'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
 
@@ -298,9 +306,9 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<label for="email">Catagory</label>
 		<select name="catagory" id="catagory">
 			<option></option>
-		<?php 
-		foreach($catagorys as $catagory): 
-			
+		<?php
+		foreach($catagorys as $catagory):
+
 			if ($ticket['catagory']==$catagory['catagory'])
 			{
 				echo ('<option selected>'.$catagory['catagory'].'</option>');
@@ -309,8 +317,8 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			{
 			echo ('<option>'.$catagory['catagory'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
 
@@ -319,17 +327,16 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-	
-		
+
+
 		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
-            <input type="submit" value="Update">
-			
+
         </form>
-	
-		
-        
-		
-  
+
+
+
+
+
     </div>
 
 </div>

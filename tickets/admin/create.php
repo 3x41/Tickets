@@ -33,28 +33,30 @@ $cookie_name = "Tickets";
 
 if(!isset($_COOKIE[$cookie_name])) {
   //echo "Cookie named '" . $cookie_name . "' is not set!";
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
 	$username = $_COOKIE[$cookie_name];
 }
 ?>
 
 <?=template_header('Create Ticket')?>
-
+<?php if ($msg): ?>
+<p><?=$msg?></p>
+<?php endif; ?>
 <div class="content create">
 	<h2>Create Ticket</h2>
     <form action="create.php" method="post">
         <label for="title">Title</label>
         <input type="text" name="title" placeholder="Title" id="title" required>
         <label for="email">Email</label>
-        <input type="email" name="email" placeholder="johndoe@example.com" id="email">
-		
+        <input type="email" name="email" placeholder="Email Address" id="email">
+
 		<label for="email">Assign to User</label>
 				<select name="assigned" id="assigned">
 					<option></option>
-		<?php 
-		foreach($users as $user): 
-			
+		<?php
+		foreach($users as $user):
+
 			if ($username==$user['username'])
 			{
 				echo ('<option selected>'.$user['username'].'</option>');
@@ -63,26 +65,24 @@ if(!isset($_COOKIE[$cookie_name])) {
 			{
 			echo ('<option>'.$user['username'].'</option>');
 			}
-			
-        endforeach; 
+
+        endforeach;
 		?>
 		</select>
-	
+
 
 
 		<!--
 		<label for="title">File Attachment (Not working)</label>
-        
+
 		<input type="file" name="attachment" placeholder="File" id="file">
         -->
-		
+
         <label for="msg">Message</label>
         <textarea name="msg" placeholder="Enter your message here..." id="msg" required></textarea>
         <input type="submit" value="Create Ticket">
     </form>
-    <?php if ($msg): ?>
-    <p><?=$msg?></p>
-    <?php endif; ?>
+
 </div>
 
 <?=template_footer()?>

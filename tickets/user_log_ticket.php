@@ -27,29 +27,29 @@ if (isset($_POST['title'], $_POST['email'], $_POST['msg'])) {
 ?>
 
 <?=login_header('Create Ticket')?>
-
+<?php if ($msg): ?>
+<p><?=$msg?></p>
+<?php endif; ?>
 <div class="content create">
 	<h2>Create Ticket</h2>
     <form action="user_log_ticket.php" method="post">
         <label for="title">Title</label>
         <input type="text" name="title" placeholder="Title" id="title" required>
         <label for="email">Email</label>
-        <input type="email" name="email" placeholder="johndoe@example.com" id="email">
-		
-		
+        <input type="email" name="email" placeholder="Email Address" id="email">
+
+
 		<!--
 		<label for="title">File Attachment (Not working)</label>
-        
+
 		<input type="file" name="attachment" placeholder="File" id="file">
         -->
-		
+
         <label for="msg">Message</label>
         <textarea name="msg" placeholder="Enter your message here..." id="msg" required></textarea>
         <input type="submit" value="Create Ticket">
     </form>
-    <?php if ($msg): ?>
-    <p><?=$msg?></p>
-    <?php endif; ?>
+
 </div>
 
 <?=template_footer()?>

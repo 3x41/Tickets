@@ -1,0 +1,92 @@
+Tickets
+
+	Basic ticket system, no email features but maybe later can add as module
+	No SLAs or timing, a simple ticket logging system
+	Will never be designed to be a complex big program
+	
+
+https://fontawesome.com/v5.9/icons?d=gallery&p=2
+
+Development Stages
+
+Alpha -> Beta -> Release
+
+Alpha 	- Features and Code always changing
+Beta 		- Feature freeze, just bugs and maybe some UI updates
+Release - Only critical bugs may be updated.
+
+What the letter mean
+
+BUG			- Bug found to break the system
+GUI			- Looks of the program changed in some way
+FEA			- Feature that was added
+
+
+TODO
+
+Features to include
+	Add file attachments feature
+	Add reports feature, overview with pie charts
+	Add search feature to see past tickets
+	email options (much later)
+
+Bugs
+
+
+
+
+Alpha Version 0.7 (Testing stable for Beta)
+	<BUG>	Fixed comment updating
+	<GUI>	Update button removed so only one now
+	<BUG>	Back button fixed - create ticket>goes to view ticket, back button is wrong, goes back to create
+	<GUI>	icon on items Fixed
+	<BUG>	Only one CSS file now used in the inc folder
+	<GUI>	Cap first letter of user on welcome index
+	<GUI>	Minor typo fixes in the admin config area
+	<BUG>	Fixed not logged on to redirect to correct page
+	<GUI>	Messages of errors, move to top instead of bottom
+
+Alpha Version 0.5 / 0.6
+
+	* added source table and field in ticket
+	* can now delete a user in the system
+	* config section now in
+	* ticket source management done in config
+	* ticket location management done in config
+	* ticket department management done in config
+	* ticket category management done in config
+  * DB - Added category tables (for future)
+  * DB - Added category fields to tickets table (for future)
+
+Alpha Version 0.4
+  * List ticket bug fix in sql
+  * counts of tickets now in
+  * button layout changed to top
+  * back button in for better userablity
+  * ticket icon changed
+  * deactivate icon changed
+  * user create ticket header menu updated for better access
+  * some other ui changes to make it easier to use
+  * password now masked out
+  * general flow much better and quick to work
+  * user log ticket now has log another ticket button
+  * DB - Added location,department tables (for future)
+  * DB - Added location,department, resolved fields to tickets table (for future)
+  * can now assign to no-one on create and edit ticket
+  * Resolved date now added when ticket closed/resolved in DB.
+
+Alpha Version 0.3
+  * Control over shown tickets - my tickets, unassigned tickets, All open tickets
+  * Re-assign ticket is not working
+
+Alpha Version 0.2
+  * File restructor in folders and paths updated in all code
+  * Forced to login.php if no cookie
+  * Begin more tidyup e.g. footer, css bits
+  * Comments now have assigned name attached.
+  * User can log ticket with confirmation screen.
+
+Alpha Version 0.1
+  * Code from website example created
+  * On hold fuction working
+  * Users feature added

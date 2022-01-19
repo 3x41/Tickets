@@ -26,10 +26,10 @@ if (isset($_POST['department'])) {
 	<a href="javascript:window.history.back();" class="btn" >Back</a>
 	</div>
 	
-	<h2>Create department</h2>
+	<h2>Create Department</h2>
     <form action="create_department.php" method="post">
-        <label for="Username">department</label>
-        <input type="text" name="department" placeholder="department" id="department" required>
+        <label for="Username">Department Name</label>
+        <input type="text" name="department" placeholder="Department Name" id="department" required>
         <input type="hidden" name="status" value="active" id="status">
         <input type="submit" value="Create department">
     </form>
