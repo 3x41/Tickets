@@ -3,7 +3,7 @@ Tickets
 	Basic ticket system, no email features but maybe later can add as module
 	No SLAs or timing, a simple ticket logging system
 	Will never be designed to be a complex big program
-	
+
 
 https://fontawesome.com/v5.9/icons?d=gallery&p=2
 
@@ -22,20 +22,25 @@ GUI			- Looks of the program changed in some way
 FEA			- Feature that was added
 
 
-TODO
+Planned for Future Versions
+	Bug testing
+	Closing or resolving ticket needs to save comment too
+	More Reports
+	More Searching
+	Improve Looks
+	Tidy Code
 
-Features to include
-	Add file attachments feature
-	Add reports feature, overview with pie charts
-	Add search feature to see past tickets
-	email options (much later)
+Version 0.8a (Alpha)
 
-Bugs
+	<FEA>	Priority needs adding to DB - db added, need php files, config php done
+	<BUG>	When first logging in, shows all open tickets, just show unassigned
+	<FEA> Very basic report - total for current year (open, close)
+  <BUG> When creating ticket logged-in, need all fields same as edit - not saving in staff
+  <GUI> Ticket page needs better layout
+	<FEA> Very basic searching (ID, Text in Title)
 
+Version 0.7a (Alpha)
 
-
-
-Alpha Version 0.7 (Testing stable for Beta)
 	<BUG>	Fixed comment updating
 	<GUI>	Update button removed so only one now
 	<BUG>	Back button fixed - create ticket>goes to view ticket, back button is wrong, goes back to create
@@ -46,7 +51,7 @@ Alpha Version 0.7 (Testing stable for Beta)
 	<BUG>	Fixed not logged on to redirect to correct page
 	<GUI>	Messages of errors, move to top instead of bottom
 
-Alpha Version 0.5 / 0.6
+Version 0.5a/0.6a (Alpha)
 
 	* added source table and field in ticket
 	* can now delete a user in the system
@@ -80,7 +85,7 @@ Alpha Version 0.3
   * Re-assign ticket is not working
 
 Alpha Version 0.2
-  * File restructor in folders and paths updated in all code
+  * File restructure in folders and paths updated in all code
   * Forced to login.php if no cookie
   * Begin more tidyup e.g. footer, css bits
   * Comments now have assigned name attached.
@@ -88,5 +93,8 @@ Alpha Version 0.2
 
 Alpha Version 0.1
   * Code from website example created
-  * On hold fuction working
+  * On hold function working
   * Users feature added
+
+First Version created based on Article from David Adams
+https://codeshack.io/ticketing-system-php-mysql/

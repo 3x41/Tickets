@@ -26,47 +26,39 @@ if(!isset($_COOKIE[$cookie_name])) {
 
 	<h2>System Configuration</h2>
 
+<div class="btns"><a href="users.php" class="btn">System Users</a><p> </p></div>
+
+
+<h2>Ticket Configuration</h2>
+
+
 <div class="btns">
-<table>
-<tr>
-	<td><a href="users.php" class="btn">System Users</a></td>
-	<td>Users</td>
-</tr>
-<tr>
-	<td>Ticket Config</td>
-	<td></td>
+<a href="source.php" class="btn">Source</a>
+<p>This is a list of where the job came from. E.g. Phone, Email, IM</p>
+</div>
 
-</tr>
+<div class="btns">
+<a href="location.php" class="btn">Location</a>
+<p>Where / What room / Building</p>
+</div>
 
-<tr>
-	<td><a href="source.php" class="btn">Source</a></td>
-	<td>This is a list of where the job came from. E.g. Phone, Email, IM</td>
-</tr>
+<div class="btns">
+<a href="department.php" class="btn">Department</a>
+</div>
 
+<div class="btns">
+<a href="catagory.php" class="btn">Catagory</a>
+<p>Hardware software etc</p>
+</div>
 
-<tr>
-	<td><a href="location.php" class="btn">Location</a></td>
-	<td>Where / What room / Building</td>
-</tr>
+<div class="btns">
+<a href="priority.php" class="btn">Priority</a>
+<p>High, Normal, Low</p>
+</div>
 
-
-<tr>
-	<td><a href="department.php" class="btn">Department</a></td>
-	<td></td>
-</tr>
+</div>
 
 
-
-
-<tr>
-	<td><a href="catagory.php" class="btn">Catagory</a></td>
-	<td>Hardware software etc</td>
-</tr>
-
-
-
-
-</table>
 
 	</div>
 

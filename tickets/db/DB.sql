@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2022 at 11:46 PM
+-- Generation Time: Jan 27, 2022 at 11:14 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -82,6 +82,26 @@ INSERT INTO `location` (`id`, `location`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `priority`
+--
+
+CREATE TABLE `priority` (
+  `id` int(11) NOT NULL,
+  `priority` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `priority`
+--
+
+INSERT INTO `priority` (`id`, `priority`) VALUES
+(5, 'High'),
+(6, 'Normal'),
+(7, 'Low');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `source`
 --
 
@@ -118,30 +138,49 @@ CREATE TABLE `tickets` (
   `department` varchar(250) DEFAULT NULL,
   `location` varchar(250) DEFAULT NULL,
   `source` varchar(200) DEFAULT NULL,
-  `catagory` varchar(250) DEFAULT NULL
+  `catagory` varchar(250) DEFAULT NULL,
+  `priority` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `title`, `msg`, `email`, `created`, `status`, `assigned`, `resolved`, `department`, `location`, `source`, `catagory`) VALUES
-(1, 'Test Ticket', 'This is your first ticket.', 'support@codeshack.io', '2020-06-10 13:06:17', 'closed', 'alex', '2022-01-13 00:00:00', NULL, NULL, NULL, NULL),
-(2, 'rewrew', 'rew', 'ffds@Fds.com', '2022-01-09 21:07:35', 'closed', 'aa', NULL, NULL, NULL, NULL, NULL),
-(3, 'test', 'sdadsa', 'test@te.com', '2022-01-09 21:17:58', 'hold', 'open', NULL, NULL, NULL, NULL, NULL),
-(4, 'This is a test title', 'sdjkaldjal dasj ddjsla djskl dsajkl jkljkl adas asj ajdas\r\nd sdjska lklas ja a\r\ns\r\nd sadas das \r\nas dsjakldjskljdlkajskdj kl\r\n s', 'as@as.com', '2022-01-09 21:28:56', 'resolved', 'alex', NULL, NULL, NULL, NULL, NULL),
-(5, 'cc', 'cxz', 'c@cx.com', '2022-01-09 21:50:41', 'open', 'alex', NULL, 'IT', 'Room 101', 'Phone', ''),
-(6, 'This is asas ', 'dssa', 'dsa@dsa.com', '2022-01-09 22:21:59', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL),
-(7, 'ss', 'ss', 'ss@ss.com', '2022-01-11 00:06:31', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
-(8, 'lll', 'xzxz', 'll@ll.com', '2022-01-11 22:06:49', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL),
-(9, 'aaaaaaaaaaaaaaaaa', 'aaaaaaa', 'ss@ss.com', '2022-01-11 22:09:17', 'hold', 'alex', NULL, NULL, NULL, NULL, NULL),
-(10, 'w', 'TEST', 'ss@ss.com', '2022-01-11 23:45:15', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
-(11, 'vcv', 'dsdsa', 'vcx@vcx.com', '2022-01-12 21:48:15', 'open', 'aa', NULL, NULL, NULL, NULL, NULL),
-(12, 'ssssss', 'qqqqqqqqqqqqqqq', 'ss@ss.com', '2022-01-12 22:49:03', 'open', 'alex', NULL, NULL, NULL, NULL, NULL),
-(13, 'New ticket in', 'This is a test', 'a@a.com', '2022-01-13 22:25:36', 'closed', 'alex', '2022-01-16 00:00:00', 'IT', 'Room 101', 'Phone', 'Hardware'),
-(14, 's', 'saa', 'ss@ss.com', '2022-01-13 22:31:16', 'open', NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 'dsad', 'ccccccccccccccc', 'cookloz@aol.com', '2022-01-13 23:21:53', 'open', 'alex', NULL, '', 'Room 101', 'Phone', ''),
-(16, 'qqqqq', 'qqqq', 'cookloz@aol.com', '2022-01-13 23:25:34', 'closed', '', '2022-01-13 00:00:00', NULL, NULL, NULL, NULL);
+INSERT INTO `tickets` (`id`, `title`, `msg`, `email`, `created`, `status`, `assigned`, `resolved`, `department`, `location`, `source`, `catagory`, `priority`) VALUES
+(1, 'Test Ticket', 'This is your first ticket.', 'support@codeshack.io', '2020-06-10 13:06:17', 'closed', 'alex', '2022-01-13 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(2, 'rewrew', 'rew', 'ffds@Fds.com', '2022-01-09 21:07:35', 'closed', 'aa', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'test', 'sdadsa', 'test@te.com', '2022-01-09 21:17:58', 'closed', 'alex', '2022-01-25 00:00:00', 'IT', 'Room 101', 'Email', 'Software', 'qqq'),
+(4, 'This is a test title', 'sdjkaldjal dasj ddjsla djskl dsajkl jkljkl adas asj ajdas\r\nd sdjska lklas ja a\r\ns\r\nd sadas das \r\nas dsjakldjskljdlkajskdj kl\r\n s', 'as@as.com', '2022-01-09 21:28:56', 'resolved', 'alex', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'cc', 'cxz', 'c@cx.com', '2022-01-09 21:50:41', 'closed', 'alex', '2022-01-26 00:00:00', 'IT', 'Room 101', 'Phone', '', NULL),
+(6, 'This is asas ', 'dssa', 'dsa@dsa.com', '2022-01-09 22:21:59', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'ss', 'ss', 'ss@ss.com', '2022-01-11 00:06:31', 'resolved', 'aa', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(8, 'lll', 'xzxz', 'll@ll.com', '2022-01-11 22:06:49', 'closed', 'alex', NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'aaaaaaaaaaaaaaaaa', 'aaaaaaa', 'ss@ss.com', '2022-01-11 22:09:17', 'closed', 'alex', '2022-01-26 00:00:00', '', '', '', 'Software', ''),
+(10, 'w', 'TEST', 'ss@ss.com', '2022-01-11 23:45:15', 'resolved', 'aa', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(11, 'vcv', 'dsdsa', 'vcx@vcx.com', '2022-01-12 21:48:15', 'resolved', 'aa', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(12, 'ssssss', 'qqqqqqqqqqqqqqq', 'ss@ss.com', '2022-01-12 22:49:03', 'closed', 'alex', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(13, 'New ticket in', 'This is a test', 'a@a.com', '2022-01-13 22:25:36', 'closed', 'alex', '2022-01-16 00:00:00', 'IT', 'Room 101', 'Phone', 'Hardware', NULL),
+(14, 's', 'saa', 'ss@ss.com', '2022-01-13 22:31:16', 'resolved', 'alex', '2022-01-26 00:00:00', 'Accounts', 'Room 101', 'Phone', 'Hardware', 'ddd'),
+(15, 'dsad', 'ccccccccccccccc', 'cookloz@aol.com', '2022-01-13 23:21:53', 'closed', 'alex', '2022-01-26 00:00:00', '', 'Room 101', 'Phone', '', NULL),
+(16, 'qqqqq', 'qqqq', 'cookloz@aol.com', '2022-01-13 23:25:34', 'open', '', '2022-01-26 00:00:00', '', '', '', '', ''),
+(17, 'c', 'sa', 'a@a.com', '2022-01-18 22:25:22', 'resolved', 'alex', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(18, 'a', 'ss', 'ss@ss.com', '2022-01-19 22:30:32', 'resolved', 'alex', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(19, 'ff', 'ffffffffff', 'ss@ss.com', '2022-01-19 22:32:14', 'closed', 'alex', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, NULL),
+(20, 'q11111', '111', 'ss@ss.com', '2022-01-25 21:47:09', 'resolved', 'alex', '2022-01-26 00:00:00', NULL, NULL, NULL, NULL, 'ddd'),
+(21, '333', '33', 'a@a.com', '2022-01-25 22:06:38', 'open', 'Hardware', NULL, 'Phone', 'alex', 'Room 101', 'Accounts', 'qqq'),
+(22, 'qqqqqqqqqqqqqqqqq', 'qq', 'cookloz@aol.com', '2022-01-25 22:08:40', 'closed', 'Software', '2022-01-26 00:00:00', 'Phone', 'alex', 'Room 101', 'IT', 'ddd'),
+(23, 's', 'sss', 'ss@ss.com', '2022-01-26 22:04:05', 'resolved', 'Hardware', '2022-01-26 00:00:00', 'Phone', 'alex', 'Room 101', '', ''),
+(24, 'd', 'dd', 'dsa@dsa.com', '2022-01-26 22:11:39', 'closed', 'Software', '2022-01-26 00:00:00', 'Phone', 'alex', 'Room 101', 'Accounts', 'ddd'),
+(25, '11', '11', 'a@a.com', '2022-01-26 22:15:19', 'resolved', 'Hardware', '2022-01-26 00:00:00', 'Phone', 'alex', 'Room 101', 'IT', 'qqq'),
+(26, '11', '11', 'a@a.com', '2022-01-26 22:17:29', 'resolved', 'Hardware', '2022-01-26 00:00:00', 'Phone', 'alex', 'Room 101', 'IT', 'qqq'),
+(27, 'd', '11111', 'cookloz@aol.com', '2022-01-26 22:19:50', 'resolved', 'Hardware', '2022-01-26 00:00:00', 'Phone', 'aa', '22', 'Accounts', 'qqq'),
+(28, 'd', '11111', 'cookloz@aol.com', '2022-01-26 22:20:14', 'resolved', 'Hardware', '2022-01-26 00:00:00', 'Phone', 'aa', '22', 'Accounts', 'qqq'),
+(29, 'xx', 'xx', 'a@a.com', '2022-01-26 22:23:44', 'resolved', 'Software', '2022-01-26 00:00:00', 'Email', 'alex', 'Room 101', 'Accounts', 'ddd'),
+(30, 'zz', 'zz', 'ss@ss.com', '2022-01-26 22:36:29', 'open', 'Hardware', NULL, '', 'alex', 'Room 101', '', ''),
+(31, 'xxxx', 'xx', 'a@a.com', '2022-01-26 22:37:01', 'open', '', NULL, '', 'alex', 'Room 101', '', ''),
+(32, 'xxxx', 'xx', 'a@a.com', '2022-01-26 22:37:21', 'open', '', NULL, '', 'alex', 'Room 101', '', ''),
+(33, 'rr', 'rrr', 'a@a.com', '2022-01-26 22:41:10', 'hold', 'alex', '2022-01-26 00:00:00', 'Accounts', 'Room 101', '', '', ''),
+(34, 'kkkkkkkk', 'kk', 'ss@ss.com', '2022-01-26 22:42:22', 'open', 'alex', NULL, 'IT', '22', 'Phone', 'Software', 'qqq');
 
 -- --------------------------------------------------------
 
@@ -185,7 +224,12 @@ INSERT INTO `tickets_comments` (`id`, `ticket_id`, `msg`, `created`, `assigned`)
 (21, 2, 'aa', '2022-01-12 23:36:14', NULL),
 (22, 2, 'ssssssssss', '2022-01-12 23:38:30', NULL),
 (23, 2, 'vv', '2022-01-12 23:47:59', 'alex'),
-(24, 12, 'ssasa', '2022-01-13 22:51:30', 'alex');
+(24, 12, 'ssasa', '2022-01-13 22:51:30', 'alex'),
+(25, 3, 'ss', '2022-01-19 22:25:07', 'alex'),
+(26, 3, 'xx', '2022-01-19 22:25:14', 'alex'),
+(27, 3, 'qq', '2022-01-19 22:25:24', 'alex'),
+(28, 3, 'dsds', '2022-01-19 22:27:52', 'alex'),
+(29, 14, 'aa', '2022-01-26 22:26:48', 'alex');
 
 -- --------------------------------------------------------
 
@@ -228,6 +272,12 @@ ALTER TABLE `department`
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `priority`
+--
+ALTER TABLE `priority`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -277,6 +327,12 @@ ALTER TABLE `location`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `priority`
+--
+ALTER TABLE `priority`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `source`
 --
 ALTER TABLE `source`
@@ -286,13 +342,13 @@ ALTER TABLE `source`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tickets_comments`
 --
 ALTER TABLE `tickets_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -13,6 +13,10 @@ if(!isset($_COOKIE[$cookie_name])) {
 }
 
 
+
+
+// priority
+
 // Connect to MySQL using the below function
 $pdo = pdo_connect_mysql();
 // Check if the ID param in the URL exists
@@ -36,7 +40,7 @@ if (isset($_POST['assigned'])) {
 
 
 
-	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."', `location` = '".$_POST['location']."', `source` = '".$_POST['source']."', `department` = '".$_POST['department']."', `catagory` = '".$_POST['catagory']."' WHERE `tickets`.`id` =".$_POST['id'];
+	$ll = "UPDATE `tickets` SET `assigned` = '".$_POST['assigned']."', `location` = '".$_POST['location']."', `source` = '".$_POST['source']."', `department` = '".$_POST['department']."', `catagory` = '".$_POST['catagory']."', `priority` = '".$_POST['priority']."' WHERE `tickets`.`id` =".$_POST['id'];
 	//echo ($ll);
 
 	$stmt = $pdo->prepare($ll);
@@ -115,6 +119,17 @@ $stmt = $pdo->prepare('SELECT * FROM catagory');
 $stmt->execute();
 $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+
+
+// MySQL query that retrieves  all the tickets from the databse
+$stmt = $pdo->prepare('SELECT * FROM priority');
+$stmt->execute();
+$prioritys = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 ?>
 
 <?=template_header('Ticket')?>
@@ -129,34 +144,7 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<div class="btns">
 
 		<a href="index.php?vtickets=mytickets" class="btn" >Back</a>
-
-		<?php
-		if ($ticket['status']=="closed" || $ticket['status']=="resolved")
-		{
-		?>
-			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Re-Open Ticket</a>
-		<?php
-		}
-
-		if ($ticket['status']=="hold")
-		{
-			?>
-			<a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Remove Hold</a>
-		<?php
-		}
-		else
-		{
-			?>
-			<a href="view.php?id=<?=$_GET['id']?>&status=hold" class="btn red">On Hold</a>
-		<?php
-		}
-
-		?>
-
-
-	<a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
-        <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
-  </div>
+</div>
 
 
 
@@ -207,7 +195,7 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             <textarea name="msg" id="msg" placeholder="Enter your comment..."></textarea>
-            <input type="submit" value="Update Ticket">
+
 
 
 
@@ -326,14 +314,61 @@ $catagorys = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
+    <label for="email">Priority</label>
+    <select name="priority" id="priority">
+      <option></option>
+    <?php
+    foreach($prioritys as $priority):
+
+      if ($ticket['priority']==$priority['priority'])
+      {
+        echo ('<option selected>'.$priority['priority'].'</option>');
+      }
+      else
+      {
+      echo ('<option>'.$priority['priority'].'</option>');
+      }
+
+        endforeach;
+    ?>
+    </select>
 
 
 
 		<input type="hidden" name="id" id="id" value="<?php echo($_GET['id']); ?>">
-
+<input type="submit" value="Update Ticket">
         </form>
 
+        <div class="btns">
 
+          <a href="index.php?vtickets=mytickets" class="btn" >Back</a>
+
+          <?php
+          if ($ticket['status']=="closed" || $ticket['status']=="resolved")
+          {
+          ?>
+            <a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Re-Open Ticket</a>
+          <?php
+          }
+
+          if ($ticket['status']=="hold")
+          {
+            ?>
+            <a href="view.php?id=<?=$_GET['id']?>&status=open" class="btn">Remove Hold</a>
+          <?php
+          }
+          else
+          {
+            ?>
+            <a href="view.php?id=<?=$_GET['id']?>&status=hold" class="btn red">On Hold</a>
+          <?php
+          }
+
+          ?>
+
+        <a href="view.php?id=<?=$_GET['id']?>&status=closed" class="btn red">Close Ticket</a>
+              <a href="view.php?id=<?=$_GET['id']?>&status=resolved" class="btn red">Resolve Ticket</a>
+        </div>
 
 
 

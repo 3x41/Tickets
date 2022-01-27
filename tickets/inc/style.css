@@ -174,7 +174,7 @@ body {
     padding: 15px 0;
     display: flex;
     flex-flow: column;
-    width: 400px;
+    width: 50%;
 }
 .create form label, .view form label {
     display: inline-flex;

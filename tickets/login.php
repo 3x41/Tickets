@@ -22,12 +22,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count($users) > 0)
 {
 	echo ("Allow Access");
-	
+
 	$cookie_name = "Tickets";
 $cookie_value = $_POST['username'];
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
-header('Location: admin/index.php');
+header('Location: admin/index.php?vtickets=unassigned');
 }
 
 
@@ -50,7 +50,7 @@ header('Location: admin/index.php');
         <input type="text" name="username" placeholder="Username" id="username" required>
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="Password" id="password">
-		
+
         <input type="submit" value="Login">
     </form>
     <?php if ($msg): ?>
@@ -59,9 +59,9 @@ header('Location: admin/index.php');
 </div>
 
 
-	
-	
-	
+
+
+
 
 </div>
 
